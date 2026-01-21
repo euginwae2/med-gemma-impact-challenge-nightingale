@@ -1,4 +1,4 @@
-Based solely on the provided resource documents, here are the detailed static UI/UX mockup specifications for the **Nightingale** platform, adhering to **Google’s Material Design 3** language.
+Detailed static UI/UX mockup specifications for the **Nightingale** platform, adhering to **Google’s Material Design 3** language.
 
 ---
 
