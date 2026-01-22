@@ -1,69 +1,67 @@
-import React from "react";
-import { useDesignTokens } from "../../design-system/theme/ThemeProvider"
-import { SpacingToken } from "../../design-system/theme/tokens";
+'use client';
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary" | "tertiary" | "fab";
-  size?: "small" | "medium" | "large";
-  fullWidth?: boolean;
-  loading?: boolean;
-  startIcon?: React.ReactNode;
-  endIcon?: React.ReactNode;
+import React from "react";
+
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: "primary" | "secondary" | "tertiary" | "danger";
+  size?: "sm" | "md" | "lg";
+  // CHANGED: Accept ReactNode (e.g., <Mic />) instead of LucideIcon (Mic)
+  icon?: React.ReactNode; 
+  iconPosition?: "left" | "right";
+  isLoading?: boolean;
 }
 
 export const Button: React.FC<ButtonProps> = ({
   variant = "primary",
-  size = "medium",
-  fullWidth = false,
-  loading = false,
-  startIcon,
-  endIcon,
+  size = "md",
+  icon,
+  iconPosition = "left",
+  isLoading = false,
   children,
-  disabled,
   className = "",
+  disabled,
   ...props
 }) => {
-  const tokens = useDesignTokens();
-
   const baseStyles =
-    "inline-flex items-center justify-center font-medium transition-all duration-200 focus-visible:outline-none disabled:opacity-50 disabled:cursor-not-allowed";
-
-  const variantStyles = {
-    primary: `bg-primary-500 text-surface hover:bg-primary-600 active:bg-primary-700 shadow-1 hover:shadow-2 active:shadow-inner`,
-    secondary: `bg-transparent border border-gray-300 text-primary-500 hover:bg-primary-50 active:bg-primary-100 hover:border-primary-500`,
-    tertiary: `bg-transparent text-primary-500 hover:bg-primary-50 active:bg-primary-100 underline-offset-2 hover:underline`,
-    fab: `rounded-full bg-primary-500 text-surface shadow-3 hover:shadow-4 active:shadow-inner`,
-  };
+    "inline-flex items-center justify-center font-medium transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98]";
 
   const sizeStyles = {
-    small: `text-sm px-3 py-2 min-h-10`,
-    medium: `text-base px-4 py-3 min-h-12 rounded-xl`,
-    large: `text-lg px-6 py-4 min-h-14 rounded-xl`,
-    fab: `w-14 h-14 rounded-full`, // Fixed size for FAB
+    sm: "min-h-[40px] px-4 py-1 text-label rounded-lg",
+    md: "min-h-[48px] px-6 py-2 text-body rounded-xl", 
+    lg: "min-h-[56px] px-8 py-3 text-h3 rounded-xl",
   };
 
-  const widthStyle = fullWidth ? "w-full" : "";
-  const isFab = variant === "fab";
+  const variantStyles = {
+    primary:
+      "bg-primary-500 text-surface shadow-1 hover:bg-primary-600 hover:shadow-2 focus-visible:ring-primary-500",
+    secondary:
+      "bg-transparent border border-gray-300 text-primary-600 hover:bg-primary-50 focus-visible:ring-primary-500",
+    tertiary:
+      "bg-transparent text-primary-500 hover:bg-primary-50 px-2 min-w-0 shadow-none",
+    danger:
+      "bg-error-500 text-white hover:bg-error-600 focus-visible:ring-error-500 shadow-1",
+  };
 
   return (
     <button
-      className={`
-        ${baseStyles}
-        ${variantStyles[variant]}
-        ${isFab ? sizeStyles.fab : sizeStyles[size]}
-        ${widthStyle}
-        ${className}
-      `}
-      disabled={disabled || loading}
-      aria-busy={loading}
+      className={`${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${className}`}
+      disabled={disabled || isLoading}
       {...props}
     >
-      {loading && (
-        <span className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+      {isLoading ? (
+        <span className="flex items-center gap-2">
+           {/* Spinner SVG omitted for brevity, keep your original */}
+           <span className="animate-spin">...</span> 
+          {children}
+        </span>
+      ) : (
+        <span className="flex items-center gap-2">
+          {/* CHANGED: Render the node directly */}
+          {icon && iconPosition === "left" && icon}
+          {children}
+          {icon && iconPosition === "right" && icon}
+        </span>
       )}
-      {startIcon && !loading && <span className="mr-2">{startIcon}</span>}
-      {!isFab && children}
-      {endIcon && <span className="ml-2">{endIcon}</span>}
     </button>
   );
 };

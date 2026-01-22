@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from "react";
 import { ThemeProvider as MUIThemeProvider, createTheme } from "@mui/material";
-import { DESIGN_TOKENS } from "./tokens";
+import { DESIGN_TOKENS } from ".";
 
 // Create Material-UI theme
 const theme = createTheme({

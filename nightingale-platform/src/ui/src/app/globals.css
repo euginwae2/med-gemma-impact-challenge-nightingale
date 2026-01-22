@@ -1,0 +1,154 @@
+/* 1. Import Tailwind v4 Engine */
+@import "tailwindcss";
+
+/* 2. Explicitly link the config file to resolve the Evaluation Error */
+@config "../../tailwind.config.ts";
+
+/* Nightingale UI - Design System Foundation
+  Strict adherence to MD3 and Healthcare Accessibility Standards
+*/
+
+@theme {
+  /* --- Colors (Mapped from DESIGN_TOKENS) --- */
+  --color-primary-50: #e8f0fe;
+  --color-primary-500: #1a73e8;
+  --color-primary-600: #0d62c9;
+  --color-primary-900: #073667;
+
+  --color-secondary-50: #e6f4ea;
+  --color-secondary-500: #34a853;
+  --color-secondary-900: #1c4623;
+
+  --color-error-500: #ea4335;
+  --color-warning-500: #fbbc04;
+
+  --color-surface: #ffffff;
+  --color-background: #f8f9fa;
+
+  --color-text-high: #202124;
+  --color-text-medium: #5f6368;
+  --color-text-low: #9aa0a6;
+
+  /* --- Spacing & Layout --- */
+  --spacing-unit: 8px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+
+  /* --- Border Radius (Nightingale Specs) --- */
+  --radius-md: 12px; /* Used for Cards */
+  --radius-xl: 20px; /* Used for Main Buttons */
+  --radius-full: 9999px;
+
+  /* --- Elevation (MD3 Shadows) --- */
+  --shadow-1: 0px 1px 2px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-2: 0px 2px 4px rgba(0, 0, 0, 0.1), 0px 3px 6px rgba(0, 0, 0, 0.1);
+  --shadow-3: 0px 4px 8px rgba(0, 0, 0, 0.12), 0px 6px 12px rgba(0, 0, 0, 0.08);
+
+  /* --- Typography --- */
+  --font-sans: "Roboto", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  /* Ensure a calm, focused environment for health data */
+  body {
+    @apply bg-background text-text-high font-sans antialiased;
+    color-scheme: light;
+    line-height: 1.5;
+  }
+
+  /* ACCESSIBILITY CRITICAL: 48px Minimum Touch Targets 
+     Prevents errors for users with motor impairment or high stress.
+  */
+  button,
+  a,
+  [role="button"],
+  input[type="checkbox"],
+  input[type="radio"] {
+    @apply min-h-[48px] min-w-[48px] cursor-pointer;
+    touch-action: manipulation;
+  }
+
+  /* High-visibility focus rings for keyboard navigation */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-primary-500 ring-offset-2;
+  }
+
+  h1 {
+    @apply text-[32px] font-bold tracking-tight mb-4;
+  }
+  h2 {
+    @apply text-[24px] font-semibold tracking-normal mb-3;
+  }
+  h3 {
+    @apply text-[20px] font-medium mb-2;
+  }
+
+  /* Custom Focus Ring for MD3 Accessibility */
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 4px;
+  }
+
+  /* Visually Hidden Utility for Screen Readers */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+}
+
+@layer components {
+  /* Nightingale Card Base */
+  .n-card {
+    @apply bg-surface rounded-md p-md shadow-1 transition-shadow hover:shadow-2;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  /* Dashboard Grid */
+  .n-dashboard-layout {
+    @apply grid grid-cols-1 md:grid-cols-12 gap-md p-md max-w-7xl mx-auto;
+  }
+
+  /* Healthcare Progress Indicator (Thin & Calm) */
+  .n-progress-bar {
+    @apply h-1 w-full bg-gray-100 rounded-full overflow-hidden;
+  }
+  .n-progress-fill {
+    @apply h-full bg-primary-500 transition-all duration-500 ease-out;
+  }
+
+  /* Voice Recording Pulse Animation for MedASR */
+  .n-pulse-recording {
+    @apply animate-pulse bg-error-500 rounded-full;
+    box-shadow: 0 0 0 0 rgba(234, 67, 53, 0.7);
+  }
+}
+
+/* Custom Scrollbar for Medical Timeline */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded-full hover:bg-gray-400 transition-colors;
+}
+
+/* Accessibility: Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
