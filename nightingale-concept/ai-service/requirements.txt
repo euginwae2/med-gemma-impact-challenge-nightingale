@@ -1,0 +1,27 @@
+# Core
+fastapi>=0.104.1
+uvicorn[standard]>=0.24.0
+pydantic>=2.5.0
+python-multipart>=0.0.6
+
+# HuggingFace & ML
+transformers>=4.35.0
+torch>=2.1
+accelerate>=0.24.1
+sentencepiece>=0.1.99
+
+# Data & ML utilities
+scikit-learn>=1.3.2
+pandas>=2.1.4
+
+# Audio/Image processing
+librosa>=0.10.1
+soundfile>=0.12.1
+Pillow>=10.1.0
+opencv-python>=4.8.1.78
+pydicom>=2.4.3
+
+# Utilities
+redis>=5.0.1
+httpx>=0.25.1
+python-dotenv>=1.0.0

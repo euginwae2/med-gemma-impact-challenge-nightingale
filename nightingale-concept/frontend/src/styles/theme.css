@@ -1,0 +1,143 @@
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --font-size: 16px;
+  
+  /* Material Design 3 Colors */
+  --primary: #1A73E8;
+  --primary-foreground: #FFFFFF;
+  --secondary: #34A853;
+  --secondary-foreground: #FFFFFF;
+  --error: #EA4335;
+  --error-foreground: #FFFFFF;
+  --warning: #FBBC04;
+  --warning-foreground: #202124;
+  --surface: #FFFFFF;
+  --background: #F8F9FA;
+  --foreground: #202124;
+  --muted-foreground: #5F6368;
+  --disabled-foreground: #9AA0A6;
+  
+  --border: #DADCE0;
+  --input-background: #FFFFFF;
+  --card: #FFFFFF;
+  --card-foreground: #202124;
+  
+  /* Success colors */
+  --success: #34A853;
+  --success-foreground: #FFFFFF;
+  --success-background: #E6F4EA;
+  
+  /* Error backgrounds */
+  --error-background: #FCE8E6;
+  
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 24px;
+  
+  /* Spacing */
+  --spacing-unit: 8px;
+  
+  /* Font weights */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  
+  /* Shadows */
+  --shadow-1: 0 1px 3px rgba(0, 0, 0, 0.12);
+  --shadow-2: 0 4px 6px rgba(0, 0, 0, 0.16);
+  --shadow-3: 0 8px 16px rgba(0, 0, 0, 0.20);
+}
+
+@theme inline {
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-error: var(--error);
+  --color-error-foreground: var(--error-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-surface: var(--surface);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-disabled-foreground: var(--disabled-foreground);
+  --color-border: var(--border);
+  --color-input-background: var(--input-background);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-success-background: var(--success-background);
+  --color-error-background: var(--error-background);
+  
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  html {
+    font-size: var(--font-size);
+  }
+
+  h1 {
+    font-size: 32px;
+    font-weight: var(--font-weight-bold);
+    line-height: 1.5;
+    color: var(--foreground);
+  }
+
+  h2 {
+    font-size: 24px;
+    font-weight: var(--font-weight-bold);
+    line-height: 1.5;
+    color: var(--foreground);
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: var(--font-weight-bold);
+    line-height: 1.5;
+    color: var(--foreground);
+  }
+
+  h4 {
+    font-size: 16px;
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+    color: var(--foreground);
+  }
+
+  label {
+    font-size: 14px;
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+    color: var(--foreground);
+  }
+
+  button {
+    font-size: 14px;
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  input, textarea {
+    font-size: 16px;
+    font-weight: var(--font-weight-normal);
+    line-height: 1.5;
+  }
+}
